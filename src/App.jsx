@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
+import AppNavbar from './components/AppNavbar';
+
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Logout from './pages/Logout';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState({
+    id: null,
+    isAdmin: null
+  });
+
+  function unsetUser() {
+    setUser({
+      id: null,
+      isAdmin: null
+    });
+    localStorage.clear();
+  }
+
+  useEffect(() => {
+    fetch('http://localhost:4002/b2/users/details', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data && data._id) {
+        setUser({
+          id: data._id,
+          isAdmin: data.isAdmin
+        });
+      } else {
+        setUser({
+          id: null,
+          isAdmin: null
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(user);
+    console.log(localStorage);
+  }, [user]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <UserProvider value={{ user, setUser, unsetUser }}>
+      <Router>
+        <AppNavbar />
+        <Container>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+          </Routes>
+        </Container>
+      </Router>
+    </UserProvider>
+  );
 }
 
-export default App
+export default App;
+
