@@ -1,49 +1,47 @@
 import { useState, useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import EditCourse from './EditCourse';
-import ArchiveCourse from './ArchiveCourse';
+import { Link } from 'react-router-dom';
 
-export default function AdminView({ coursesData, fetchData }) {
-
-
-    const [courses, setCourses] = useState([])
+export default function AdminView({ productsData, fetchData }) {
 
 
-    //Getting the coursesData from the courses page
+    const [products, setProducts] = useState([])
+
     useEffect(() => {
-        console.log(coursesData);
 
-        const coursesArr = coursesData.map(course => {
+        const productsArr = productsData.map(product => {
             return (
-                <tr key={course._id}>
-                    <td>{course._id}</td>
-                    <td>{course.name}</td>
-                    <td>{course.description}</td>
-                    <td>{course.price}</td>
-                    <td className={course.isActive ? "text-success" : "text-danger"}>
-                        {course.isActive ? "Available" : "Unavailable"}
+                <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price}</td>
+                    <td className={product.isActive ? "text-success" : "text-danger"}>
+                        {product.isActive ? "Available" : "Unavailable"}
                     </td>
-                    <td className="text-center">
-                        <EditCourse course={course._id} fetchData={fetchData}/>
-                        <ArchiveCourse course={course._id} isActive={course.isActive} fetchData={fetchData}/>
-                    </td>
+                 {/*   <td className="text-center">
+                        <EditProduct product={product._id} fetchData={fetchData}/>
+                        <ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/>
+                    </td>*/}
                 </tr>
                 )
         })
 
-        setCourses(coursesArr)
+        setProducts(productsArr)
 
-    }, [coursesData])
+    }, [productsData])
 
 
     return(
         <>
             <h1 className="text-center my-4"> Admin Dashboard</h1>
+               <div className="d-flex justify-content-center align-items-center mb-4">
+            <Link to={`/addProduct`} className ="btn btn-primary me-2">Add Product</Link>
+            <Link to={`/`} className = "btn btn-success">Show Orders</Link>
+             </div>
             
             <Table striped bordered hover responsive>
                 <thead>
-                    <tr className="text-center">
-                        <th>ID</th>
+                    <tr className="text-center table-dark">
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
@@ -53,7 +51,7 @@ export default function AdminView({ coursesData, fetchData }) {
                 </thead>
 
                 <tbody>
-                    {courses}
+                    {products}
                 </tbody>
             </Table>    
         </>

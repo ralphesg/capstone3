@@ -1,11 +1,15 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import UserContext from '../context/UserContext';
 import '../style.css';
 
+
+
 export default function AppNavbar() {
     const { user } = useContext(UserContext);
+
+
 
     return (
         <Navbar expand="lg" className="logo">
