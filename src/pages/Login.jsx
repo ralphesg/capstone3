@@ -10,16 +10,14 @@ export default function Login() {
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate(); 
 
-    // State hooks to store the values of the input fields
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // State to determine whether submit button is enabled or not
     const [isActive, setIsActive] = useState(true);
 
 
     function authenticate(e) {
 
-        // Prevents page redirection via form submission
+      
         e.preventDefault();
         fetch('http://localhost:4002/b2/users/login', {
             method: 'POST',
@@ -39,11 +37,7 @@ export default function Login() {
             if(data.access !== undefined){
 
                 console.log(data.access);
-                // Set the token of the authenticated user in the local storage
-                /*
-                Syntax:
-                    localStorage.setItem('propertyName', value)
-                */
+    
                 // allows us to manipulate the browser's localStorage property to store information indefinitely to help demonstrate conditional rendering and the login and logout features
                 localStorage.setItem('token', data.access);
                 retrieveUserDetails(data.access);
@@ -59,7 +53,7 @@ export default function Login() {
                     navigate('/');
                 });
             
-            } else if (data.message == "Incorrect email or password") {
+            } else if (data.error === "Email and password do not match") {
 
                 Swal.fire({
                     title: "Login Failed",
@@ -104,14 +98,12 @@ export default function Login() {
 
     useEffect(() => {
 
-        // Validation to enable submit button when all fields are populated and both passwords match
         if(email !== '' && password !== ''){
             setIsActive(true);
 
         }else{
             setIsActive(false);
         }
-         console.log(user);
 
     }, [email, password]);
 

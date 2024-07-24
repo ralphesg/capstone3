@@ -19,9 +19,8 @@ export default function ProductsCatalog() {
         })
         .then(res => res.json())
         .then(data => {         
-            console.log(data);
-
-            if(data.message === "No courses found"){
+            
+            if(data.message === "No product found"){
                 setProducts([])
             } else {
                 setProducts(data.products);
