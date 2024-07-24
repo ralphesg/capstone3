@@ -81,7 +81,8 @@ export default function AddProduct(){
     }
 
     return (
-
+    		(user.isAdmin === true && user.id !== null)
+            ?
             <>
                 <h1 className="my-5 text-center">Add Product</h1>
                 <Form onSubmit={e => createProduct(e)}>
@@ -118,8 +119,8 @@ export default function AddProduct(){
                     <Button variant="primary" type="submit" className="my-5">Submit</Button>
                 </Form>
             </>
-            // :
-            // <Navigate to="/products" />
+            :
+            <Navigate to="/products" />
 
     )
 
