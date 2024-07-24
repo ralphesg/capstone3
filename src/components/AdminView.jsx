@@ -22,7 +22,7 @@ export default function AdminView({ productsData, fetchData }) {
                     </td>
                     <td className="text-center">
                         <UpdateProduct product={product._id} fetchData={fetchData}/>
-
+                        <ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/>
                     </td>
                 </tr>
                 )
