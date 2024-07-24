@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import ProductsCatalog from './pages/ProductsCatalog'
 import ProductView from './pages/ProductView'
+import AddProduct from './pages/AddProduct'
 
 function App() {
   const [user, setUser] = useState({
@@ -67,6 +68,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/products" element={<ProductsCatalog />}/>
             <Route path="/products/:productId" element={<ProductView />}/>
+            <Route path="/addProduct" element={<AddProduct />}/>
           </Routes>
         </Container>
       </Router>

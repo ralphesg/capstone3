@@ -83,8 +83,7 @@ export default function Login() {
 
     function retrieveUserDetails(token){
 
-        // The token will be sent as part of the request's header information
-        // We put "Bearer" in front of the token to follow implementation standards for JWTs
+        
         fetch('http://localhost:4002/b2/users/details', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -92,9 +91,7 @@ export default function Login() {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
 
-            // Changes the global "user" state to store the "id" and the "isAdmin" property of the user which will be used for validation across the whole application
             setUser({
                 id: data._id,
                 isAdmin: data.isAdmin
@@ -110,6 +107,7 @@ export default function Login() {
         }else{
             setIsActive(false);
         }
+
 
     }, [email, password]);
 
