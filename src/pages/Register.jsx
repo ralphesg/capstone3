@@ -174,9 +174,9 @@ export default function Register() {
              </Form.Group>
 
              {isActive ?
-                 <Button variant="success" type="submit" id="submitBtn" block>Register Now</Button>
+                 <Button variant="success" type="submit" id="submitBtn">Register Now</Button>
                  :
-                 <Button variant="success" type="submit" id="submitBtn" block disabled>Register Now</Button>
+                 <Button variant="success" type="submit" id="submitBtn" disabled>Register Now</Button>
              }
          </Form>
      </div>

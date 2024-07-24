@@ -12,6 +12,7 @@ export default function AppNavbar() {
             <Container>
                     <Nav className="nav-bar">
                         <Nav.Link as={NavLink} to="/" exact="true">Home</Nav.Link>
+                        <Nav.Link as={NavLink} to="/products" exact="true">Products</Nav.Link>
                         {(user.id !== null && user.id !== undefined) ? 
                             user.isAdmin 
                                 ?
