@@ -23,11 +23,11 @@ a:hover {
 }
 
 body {
-  margin: 0;
+/*  margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100vh;*/
 }
 
 h1 {
@@ -38,7 +38,7 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+/*  padding: 0.6em 1.2em;*/
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -65,4 +65,28 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.custom-card-title {
+    color: #68a9eb;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.custom-card-description {
+    text-align: left;
+    margin-bottom: 2em;
+}
+
+.custom-card-price {
+    text-align: left;
+    color: #ff9448;
+}
+
+.custom-price {
+    text-align: left;
+}
+
+.page-title {
+    font-size: 2rem;
 }

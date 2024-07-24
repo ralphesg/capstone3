@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import AppNavbar from './components/AppNavbar';
@@ -9,6 +10,8 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import ProductsCatalog from './pages/ProductsCatalog'
+import ProductView from './pages/ProductView'
 
 function App() {
   const [user, setUser] = useState({
@@ -62,6 +65,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/products" element={<ProductsCatalog />}/>
+            <Route path="/products/:productId" element={<ProductView />}/>
           </Routes>
         </Container>
       </Router>
