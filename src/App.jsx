@@ -13,6 +13,7 @@ import Logout from './pages/Logout';
 import ProductsCatalog from './pages/ProductsCatalog'
 import ProductView from './pages/ProductView'
 import AddProduct from './pages/AddProduct'
+import CartView from './pages/CartView'
 
 function App() {
   const [user, setUser] = useState({
@@ -21,10 +22,6 @@ function App() {
   });
 
   function unsetUser() {
-    setUser({
-      id: null,
-      isAdmin: null
-    });
     localStorage.clear();
   }
 
@@ -36,10 +33,10 @@ function App() {
     })
     .then(res => res.json())
     .then(data => {
-      if (data && data._id) {
+      if(typeof data !== undefined) {
         setUser({
-          id: data._id,
-          isAdmin: data.isAdmin
+          id: data.user._id,
+          isAdmin: data.user.isAdmin
         });
       } else {
         setUser({
@@ -69,6 +66,7 @@ function App() {
             <Route path="/products" element={<ProductsCatalog />}/>
             <Route path="/products/:productId" element={<ProductView />}/>
             <Route path="/addProduct" element={<AddProduct />}/>
+            <Route path="/cart" element={<CartView />}/>
           </Routes>
         </Container>
       </Router>

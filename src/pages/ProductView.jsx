@@ -1,9 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Row, Col, InputGroup, FormControl  } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import UserContext from '../context/UserContext';
+import Swal from 'sweetalert2';
 
 export default function ProductView(){
 
+	const {user} = useContext(UserContext);
 	const { productId } = useParams();
 	const navigate = useNavigate();
 
@@ -12,6 +15,53 @@ export default function ProductView(){
 	const [description, setDescription] = useState("");
 	const [quantity, setQuantity] = useState(1);
 
+	function addToCart(productId){
+		fetch('http://localhost:4002/b2/cart/add-to-cart', {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token")}`
+
+			},
+			body: JSON.stringify({
+				productId: productId,
+				quantity: quantity
+			})
+		})
+		.then(res => res.json())
+		.then(data => {
+			console.log(productId)
+			console.log(data.message);
+
+			if(data.message === 'Error adding item to cart'){
+
+				Swal.fire({
+					title: "Error adding item to cart",
+					icon: "error",
+					text: data.error
+				});
+
+			}else if(data.message === "Item added to cart successfully"){
+
+				Swal.fire({
+					title: "Item added to cart successfully",
+					icon: "success",
+					text: "Total items in cart: "
+				});
+
+				navigate("/products");
+
+			}else{
+
+				Swal.fire({
+					title: "Error",
+					icon: "error",
+					text: "Something went wrong. Please try again."
+				});
+
+			}
+		})
+	}
 
 	useEffect(() => {
 		
@@ -65,7 +115,14 @@ export default function ProductView(){
                                 <Button variant="btn btn-dark" onClick={incrementQuantity}>+</Button>
                             </InputGroup>
                             <Card.Footer>
-                            <Button variant="primary" block="true" onClick={() => addToCart(productId)}>Add to Cart</Button>
+                           
+                              { (user.id !== null && user.id !== undefined)
+                              	? 
+                    			<Button variant="primary" block="true" onClick={() => addToCart(productId)}>Add to Cart</Button>
+                    			: 
+                    			
+                    			<Link to={`/login`} className="btn btn-primary ">Login to Add to Cart</Link>
+                }
                             </Card.Footer>
                         </Card.Body>        
                     </Card>
