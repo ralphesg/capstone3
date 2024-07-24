@@ -14,7 +14,7 @@ export default function Register() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [mobileNo, setMobileNo] = useState(0);
+    const [mobileNo, setMobileNo] = useState("")
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     // State to determine whether submit button is enable or not
@@ -111,7 +111,6 @@ export default function Register() {
                  <Form.Control
                      id="txtFirstName"
                      type="text"
-                     placeholder="John"
                      required
                      value={firstName}
                      onChange={e => { setFirstName(e.target.value) }}
@@ -122,7 +121,6 @@ export default function Register() {
                  <Form.Control
                      id="txtLastName"
                      type="text"
-                     placeholder="Doe"
                      required
                      value={lastName}
                      onChange={e => { setLastName(e.target.value) }}
@@ -133,7 +131,6 @@ export default function Register() {
                  <Form.Control
                      id="txtEmail"
                      type="email"
-                     placeholder="name@mail.com"
                      required
                      value={email}
                      onChange={e => { setEmail(e.target.value) }}
@@ -144,7 +141,6 @@ export default function Register() {
                  <Form.Control
                      id="txtMobileNo"
                      type="mobileNo"
-                     placeholder="12345678912"
                      required
                      value={mobileNo}
                      onChange={e => { setMobileNo(e.target.value) }}
@@ -155,7 +151,6 @@ export default function Register() {
                  <Form.Control
                      id="txtPassword"
                      type="password"
-                     placeholder="Password"
                      required
                      value={password}
                      onChange={e => { setPassword(e.target.value) }}
@@ -166,7 +161,6 @@ export default function Register() {
                  <Form.Control
                      id="txtConfirmPassword"
                      type="password"
-                     placeholder="Confirm Password"
                      required
                      value={confirmPassword}
                      onChange={e => { setConfirmPassword(e.target.value) }}
@@ -174,9 +168,9 @@ export default function Register() {
              </Form.Group>
 
              {isActive ?
-                 <Button variant="success" type="submit" id="submitBtn">Register Now</Button>
+                 <Button variant="success" type="submit" id="submitBtn" className="mt-3">Register Now</Button>
                  :
-                 <Button variant="success" type="submit" id="submitBtn" disabled>Register Now</Button>
+                 <Button variant="success" type="submit" id="submitBtn" className="mt-3" disabled>Register Now</Button>
              }
          </Form>
      </div>
