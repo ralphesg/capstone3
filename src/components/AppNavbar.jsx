@@ -14,28 +14,32 @@ export default function AppNavbar() {
     return (
         <Navbar expand="lg" className="logo">
             <Container>
-                    <Nav className="nav-bar">
-                        <Nav.Link as={NavLink} to="/" exact="true">Home</Nav.Link>
-                        <Nav.Link as={NavLink} to="/products" exact="true">Products</Nav.Link>
-                        {(user.id !== null && user.id !== undefined) ? 
-                            user.isAdmin 
-                                ?
-                                <>
-                                    <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
-                                </>
-                                :
-                                <>
-                                    <Nav.Link as={NavLink} to="/cart" exact="true">Cart</Nav.Link>
-                                    <Nav.Link as={NavLink} to="/logout" exact="true">Logout</Nav.Link>
-                                </>
-                            :
-                            <>
-                                <Nav.Link as={NavLink} to="/login" exact="true">Login</Nav.Link>
-                                <Nav.Link as={NavLink} to="/register" exact="true">Register</Nav.Link>
-                            </>
-                        }
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+                        <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
                     </Nav>
+                    <Nav>
+                        {user.id !== null && user.id !== undefined ? (
+                            user.isAdmin ? (
+                                <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+                            ) : (
+                                <>
+                                    <Nav.Link as={NavLink} to="/cart">Cart</Nav.Link>
+                                    <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
+                                </>
+                            )
+                        ) : (
+                            <>
+                                <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+                                <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
+                            </>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
-    )
+    );
+
 }
