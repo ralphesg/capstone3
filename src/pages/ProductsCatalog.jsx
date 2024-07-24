@@ -36,10 +36,12 @@ export default function ProductsCatalog() {
     }, [user]);
 
     return(
-       <>
+       
+        (user.isAdmin === true)
+        ?
             <AdminView productsData={products} fetchData={fetchData}/>
-        
+        :
             <UserView productsData={products} fetchData={fetchData}/>
-            </>
+            
     )
 }

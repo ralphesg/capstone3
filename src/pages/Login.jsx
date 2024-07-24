@@ -91,11 +91,14 @@ export default function Login() {
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data);
+            console.log(data.user._id);
 
-            setUser({
-                id: data._id,
-                isAdmin: data.isAdmin
+              setUser({
+                id: data.user._id,
+                isAdmin: data.user.isAdmin
             });
+           
         })
     }
 
@@ -104,10 +107,11 @@ export default function Login() {
         // Validation to enable submit button when all fields are populated and both passwords match
         if(email !== '' && password !== ''){
             setIsActive(true);
+
         }else{
             setIsActive(false);
         }
-
+         console.log(user);
 
     }, [email, password]);
 
