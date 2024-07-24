@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import UpdateProduct from '../components/UpdateProduct';
+import ArchiveProduct from '../components/ArchiveProduct';
 
 export default function AdminView({ productsData, fetchData }) {
 
@@ -18,10 +20,10 @@ export default function AdminView({ productsData, fetchData }) {
                     <td className={product.isActive ? "text-success" : "text-danger"}>
                         {product.isActive ? "Available" : "Unavailable"}
                     </td>
-                 {/*   <td className="text-center">
-                        <EditProduct product={product._id} fetchData={fetchData}/>
-                        <ArchiveProduct product={product._id} isActive={product.isActive} fetchData={fetchData}/>
-                    </td>*/}
+                    <td className="text-center">
+                        <UpdateProduct product={product._id} fetchData={fetchData}/>
+
+                    </td>
                 </tr>
                 )
         })
