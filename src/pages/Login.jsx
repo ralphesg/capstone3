@@ -17,7 +17,7 @@ export default function Login() {
 
     function authenticate(e) {
 
-      
+
         e.preventDefault();
         fetch('http://localhost:4002/b2/users/login', {
             method: 'POST',
@@ -90,7 +90,8 @@ export default function Login() {
 
               setUser({
                 id: data.user._id,
-                isAdmin: data.user.isAdmin
+                isAdmin: data.user.isAdmin,
+                email: data.user.email
             });
            
         })

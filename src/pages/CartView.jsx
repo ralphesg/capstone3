@@ -6,6 +6,7 @@ import CartToProduct from '../components/CartToProduct';
 import CartQuantity from '../components/CartQuantity';
 import RemoveItemFromCart from '../components/RemoveItemFromCart';
 import ClearCart from '../components/ClearCart';
+import Checkout from '../components/Checkout'
 
 
 export default function CartView() {
@@ -39,13 +40,15 @@ export default function CartView() {
 
         fetchCart();
 
+
     }, [user]);
 
        useEffect(() => {
         console.log(totalPrice)
+
         const cartArr = cart.map(cartItem => {
             return (
-
+              
                 <tr key={cartItem._id}>
                 	<CartToProduct cartProductId={cartItem.productId}/>
                     <CartQuantity cartProductId={cartItem.productId} cartQuantity={cartItem.quantity} fetchCart={fetchCart}/>
@@ -86,13 +89,14 @@ export default function CartView() {
                     {cartUser}
                     <tr>
                         <td colSpan="4">
-                        <Link to={`/login`} className="btn btn-success ">Checkout</Link>
+                        <Checkout fetchCart={fetchCart}/>
                         </td>
                         <td >Total: ₱{totalPrice}</td>
                     </tr>
                 </tbody>
-                        <ClearCart fetchCart={fetchCart} />
             </Table>    
+            <ClearCart fetchCart={fetchCart} />
+            
         </>
 
         )

@@ -13,7 +13,8 @@ export default function Logout(){
 	useEffect(() => {
 		setUser({
 			id: null,
-			isAdmin: null
+			isAdmin: null,
+			email: null
 		})
 	})
 	// The "localStorage.clear()" method allows us to clear the information in the localStorage ensuring that there are no information stored in our browser

@@ -9,11 +9,38 @@ export default function ProductView(){
 	const {user} = useContext(UserContext);
 	const { productId } = useParams();
 	const navigate = useNavigate();
-
 	const [name, setName] = useState("");
 	const [price, setPrice] = useState(0);
 	const [description, setDescription] = useState("");
 	const [quantity, setQuantity] = useState(1);
+	const [cart, setCart] = useState([]);
+
+
+	const updateCartLength = (data) => {
+ 		let fetchUrl = "http://localhost:4002/b2/cart/get-cart"
+
+        fetch(fetchUrl, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {         
+
+            if(data.message === "Cart not found"){
+                setCart([])
+            } else {
+                setCart(data.cart.cartItems.length);
+                
+            }
+           
+        });
+}
+
+useEffect(() => {
+	updateCartLength()
+}, [])
+   
 
 	function addToCart(productId){
 		fetch('http://localhost:4002/b2/cart/add-to-cart', {
@@ -28,13 +55,13 @@ export default function ProductView(){
 				quantity: quantity
 			})
 		})
+
 		.then(res => res.json())
 		.then(data => {
-			console.log(productId)
-			console.log(data.message);
-
+			
+			
 			if(data.message === 'Error adding item to cart'){
-
+				
 				Swal.fire({
 					title: "Error adding item to cart",
 					icon: "error",
@@ -42,11 +69,13 @@ export default function ProductView(){
 				});
 
 			}else if(data.message === "Item added to cart successfully"){
-
+			
+				console.log(productId)
+				console.log(data.message);
 				Swal.fire({
 					title: "Item added to cart successfully",
 					icon: "success",
-					text: "Total items in cart: "
+					text: `Total items in cart: ${cart}`
 				});
 
 				navigate("/products");
@@ -62,6 +91,7 @@ export default function ProductView(){
 			}
 		})
 	}
+
 
 	useEffect(() => {
 		
