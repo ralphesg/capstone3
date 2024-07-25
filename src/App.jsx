@@ -14,6 +14,7 @@ import ProductsCatalog from './pages/ProductsCatalog'
 import ProductView from './pages/ProductView'
 import AddProduct from './pages/AddProduct'
 import CartView from './pages/CartView'
+import OrderView from './pages/OrderView'
 
 function App() {
   const [user, setUser] = useState({
@@ -25,8 +26,11 @@ function App() {
     localStorage.clear();
   }
 
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
-    fetch('http://localhost:4002/b2/users/details', {
+     if (token !== null){
+          fetch('http://localhost:4002/b2/users/details', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
@@ -45,6 +49,7 @@ function App() {
         });
       }
     });
+     }
   }, []);
 
   useEffect(() => {
@@ -67,6 +72,7 @@ function App() {
             <Route path="/products/:productId" element={<ProductView />}/>
             <Route path="/addProduct" element={<AddProduct />}/>
             <Route path="/cart" element={<CartView />}/>
+            <Route path="/order" element={<OrderView />}/>
           </Routes>
         </Container>
       </Router>
