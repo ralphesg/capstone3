@@ -26,7 +26,7 @@ export default function UserView({ productsData }) {
             <p>No active products available.</p>
             :
             <Container className="container">
-                <h1 className="page-title text-center mt-5">Our Products</h1>
+                <h2 className="page-title text-center mt-4">Our Products</h2>
                 <Row className="mt-4">
                     {productsData.map(product => (
                         <Col key={product._id} xs={12} sm={6} md={4} lg={3} className="mb-4">

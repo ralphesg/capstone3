@@ -72,7 +72,7 @@ export default function CartView() {
         </>
         : 
         <>
-            <h1 className="text-center my-4">Your Shopping Cart</h1>
+            <h2 className="text-center my-4">Your Shopping Cart</h2>
             <Table striped bordered hover responsive>
                 <thead>
                     <tr className="text-center table-dark">
