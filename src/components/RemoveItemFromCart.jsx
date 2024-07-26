@@ -1,6 +1,7 @@
  import React from 'react';
  import { Button } from 'react-bootstrap';
  import Swal from 'sweetalert2';
+ import '../style.css';
 
  export default function RemoveItemFromCart({ cartProductId, fetchCart }) {
 
@@ -24,14 +25,20 @@
                  Swal.fire({
                      title: 'Success',
                      icon: 'success',
-                     text: 'Item removed from cart successfully'
+                     text: 'Item removed from cart successfully',
+                     customClass: {
+                        confirmButton: 'sweet-warning'
+                     }
                  });
                  fetchCart();
              } else {
                  Swal.fire({
                      title: 'Something Went Wrong',
                      icon: 'error',
-                     text: 'Please Try again'
+                     text: 'Please Try again',
+                     customClass: {
+                        confirmButton: 'sweet-warning'
+                     }
                  });
              }
 
@@ -40,12 +47,15 @@
              Swal.fire({
                  title: 'Error',
                  icon: 'error',
-                 text: 'Failed to remove product. Please try again later.'
+                 text: 'Failed to remove product. Please try again later.',
+                 customClass: {
+                    confirmButton: 'sweet-warning'
+                 }
              });
          }
      }
 
      return (
-         <Button variant="danger" size="sm" onClick={removeToggle}>Remove</Button>
+         <Button className="btn" variant="danger" size="sm" onClick={removeToggle}>Remove</Button>
      )
  }

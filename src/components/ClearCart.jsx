@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import '../style.css';
 
 export default function ClearCart({ fetchCart }) {
 
@@ -25,14 +26,20 @@ export default function ClearCart({ fetchCart }) {
                 Swal.fire({
                     title: 'Success',
                     icon: 'success',
-                    text: 'Cart cleared successfully'
+                    text: 'Cart cleared successfully',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
                 fetchCart(); // Refresh the cart data
             } else {
                 Swal.fire({
                     title: 'Something Went Wrong',
                     icon: 'error',
-                    text: 'Please try again'
+                    text: 'Please try again',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
             }
 
@@ -41,12 +48,23 @@ export default function ClearCart({ fetchCart }) {
             Swal.fire({
                 title: 'Error',
                 icon: 'error',
-                text: 'Failed to clear cart. Please try again later.'
+                text: 'Failed to clear cart. Please try again later.',
+                customClass: {
+                    confirmButton: 'sweet-warning'
+                }
             });
         }
     }
 
     return (
-        <Button variant="danger" size="sm" onClick={clearCart}>Clear Cart</Button>
+        <>
+        <Container className="d-flex">
+            <Row>
+                <Col>
+                <Button className="btn" variant="danger" size="sm" onClick={clearCart}>Clear Cart</Button>
+                </Col>
+            </Row>
+        </Container>
+        </>
     )
 }

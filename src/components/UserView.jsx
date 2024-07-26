@@ -43,6 +43,7 @@ export default function UserView({ productsData }) {
                                         {expanded[product._id] ? product.description : truncate(product.description, 100)}
                                         {product.description.length > 100 && (
                                             <Button
+                                                className="read-more"
                                                 variant="link"
                                                 size="sm"
                                                 onClick={() => handleReadMore(product._id)}

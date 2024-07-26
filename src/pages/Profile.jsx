@@ -3,8 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ResetPassword from '../components/ResetPassword';
-
 import UserContext from '../context/UserContext';
+import '../style.css';
 
 export default function Profile(){
 
@@ -31,7 +31,10 @@ export default function Profile(){
                 Swal.fire({
                     title: "User Not Found",
                     icon: "error",
-                    text: "User not found, please check if you're logged in or contact the administrator."
+                    text: "User not found, please check if you're logged in or contact the administrator.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 })
 
             } else {
@@ -39,7 +42,10 @@ export default function Profile(){
                 Swal.fire({
                     title: "Profile Error",
                     icon: "error",
-                    text: "Something went wrong, kindly contact us for assistance."
+                    text: "Something went wrong, kindly contact us for assistance.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 })
 
             }

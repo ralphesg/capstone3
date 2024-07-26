@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import '../style.css';
 
 export default function ArchiveProduct({ product, isActive, fetchData }) {
 
@@ -24,13 +25,19 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
                 Swal.fire({
                     title: 'Success',
                     icon: 'success',
-                    text: 'Product successfully disabled'
+                    text: 'Product successfully disabled',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
             } else {
                 Swal.fire({
                     title: 'Something Went Wrong',
                     icon: 'error',
-                    text: 'Please Try again'
+                    text: 'Please Try again',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
             }
             fetchData();
@@ -39,7 +46,10 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
             Swal.fire({
                 title: 'Error',
                 icon: 'error',
-                text: 'Failed to archive product. Please try again later.'
+                text: 'Failed to archive product. Please try again later.',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
             });
         }
     }
@@ -65,13 +75,19 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
                 Swal.fire({
                     title: 'Success',
                     icon: 'success',
-                    text: 'Product successfully enabled'
+                    text: 'Product successfully enabled',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
             } else {
                 Swal.fire({
                     title: 'Something Went Wrong',
                     icon: 'error',
-                    text: 'Please Try again'
+                    text: 'Please Try again',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
             }
             fetchData();
@@ -80,7 +96,10 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
             Swal.fire({
                 title: 'Error',
                 icon: 'error',
-                text: 'Failed to activate product. Please try again later.'
+                text: 'Failed to activate product. Please try again later.',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
             });
         }
     }
@@ -88,9 +107,9 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
     return (
         <>
             {isActive ?
-                <Button variant="danger" size="sm" onClick={() => archiveToggle(product)}>Archive</Button>
+                <Button className="button-archive" variant="danger" size="sm" onClick={() => archiveToggle(product)}>Archive</Button>
                 :
-                <Button variant="success" size="sm" onClick={() => activateToggle(product)}>Activate</Button>
+                <Button className="button-activate" variant="success" size="sm" onClick={() => activateToggle(product)}>Activate</Button>
             }
         </>
     )
