@@ -44,13 +44,12 @@ export default function CartView() {
     }, [user]);
 
        useEffect(() => {
-        console.log(totalPrice)
 
         const cartArr = cart.map(cartItem => {
             return (
               
                 <tr key={cartItem._id}>
-                	<CartToProduct cartProductId={cartItem.productId}/>
+                    <CartToProduct cartProductId={cartItem.productId}/>
                     <CartQuantity cartProductId={cartItem.productId} cartQuantity={cartItem.quantity} fetchCart={fetchCart}/>
                     <td>₱{cartItem.subtotal}</td>
                     

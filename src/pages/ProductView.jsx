@@ -15,33 +15,6 @@ export default function ProductView(){
 	const [quantity, setQuantity] = useState(1);
 	const [cart, setCart] = useState([]);
 
-
-	const updateCartLength = (data) => {
- 		let fetchUrl = "http://localhost:4002/b2/cart/get-cart"
-
-        fetch(fetchUrl, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {         
-
-            if(data.message === "Cart not found"){
-                setCart([])
-            } else {
-                setCart(data.cart.cartItems.length);
-                
-            }
-           
-        });
-}
-
-useEffect(() => {
-	updateCartLength()
-}, [])
-   
-
 	function addToCart(productId){
 		fetch('http://localhost:4002/b2/cart/add-to-cart', {
 			method: "POST",
@@ -69,14 +42,12 @@ useEffect(() => {
 				});
 
 			}else if(data.message === "Item added to cart successfully"){
-			
-				console.log(productId)
-				console.log(data.message);
-				Swal.fire({
-					title: "Item added to cart successfully",
-					icon: "success",
-					text: `Total items in cart: ${cart}`
-				});
+
+                Swal.fire({
+                    title: "Item added to cart successfully",
+                    icon: "success",
+                    text: `Total items in cart: ${data.cart.cartItems.length}`
+      			});
 
 				navigate("/products");
 
@@ -132,7 +103,7 @@ useEffect(() => {
     							<span className="custom-card-price">₱{price}</span>
 							</Card.Text>
 							<Card.Text className="m-2">Quantity</Card.Text>
-							   <InputGroup className="ms-3 mb-3">
+							   <InputGroup className="ms-3 mb-3 d-flex">
                                 <Button variant="btn btn-dark" onClick={decrementQuantity}>-</Button>
                                 <FormControl
                                     aria-label="Quantity"

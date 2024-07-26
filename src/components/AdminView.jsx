@@ -38,7 +38,7 @@ export default function AdminView({ productsData, fetchData }) {
             <h1 className="text-center my-4"> Admin Dashboard</h1>
                <div className="d-flex justify-content-center align-items-center mb-4">
             <Link to={`/addProduct`} className ="btn btn-primary me-2">Add Product</Link>
-            <Link to={`/`} className = "btn btn-success">Show Orders</Link>
+            <Link to={`/adminOrder`} className = "btn btn-success">Show Orders</Link>
              </div>
             
             <Table striped bordered hover responsive>

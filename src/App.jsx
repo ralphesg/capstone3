@@ -15,6 +15,7 @@ import ProductView from './pages/ProductView'
 import AddProduct from './pages/AddProduct'
 import CartView from './pages/CartView'
 import OrderView from './pages/OrderView'
+import AdminOrderView from './pages/AdminOrderView'
 
 function App() {
   const [user, setUser] = useState({
@@ -73,6 +74,7 @@ function App() {
             <Route path="/addProduct" element={<AddProduct />}/>
             <Route path="/cart" element={<CartView />}/>
             <Route path="/order" element={<OrderView />}/>
+            <Route path="/adminOrder" element={<AdminOrderView />}/>
           </Routes>
         </Container>
       </Router>

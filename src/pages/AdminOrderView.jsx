@@ -11,18 +11,20 @@ export default function OrderView() {
     const [order, setOrder] = useState([]);
     const [orderUser, setOrderUser] = useState([]);
     const {user} = useContext(UserContext);
-   
+    const [email, setEmail] = useState("")
+    const token = localStorage.getItem('token');
+
     const fetchOrder = () => {
-        let fetchUrl = "http://localhost:4002/b2/orders/my-orders"
+        let fetchUrl = "http://localhost:4002/b2/orders/all-orders"
 
         fetch(fetchUrl, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
+                Authorization: `Bearer ${token}`
             }
         })
         .then(res => res.json())
         .then(data => {         
-            
+        	console.log(data)
             if(data.error === "No orders found"){
                 setOrder([])
             } else {
@@ -35,23 +37,21 @@ export default function OrderView() {
    useEffect(() => {
 
         fetchOrder();
-
-
+        
     }, [user]);
 
 useEffect(() => {
-
-  const keyOrder = "key"
-  
+const keyOrder = "key"
   const orderArr = order.map(orderItem => (
     <Card key={orderItem._id} style={{ marginBottom: '20px' }}>
+    <GetEmail userId={orderItem.userId}/>
     <Card.Body>
       <Card.Text>Purchased on: {new Date(orderItem.orderedOn).toLocaleString()}</Card.Text>
        <ListGroup className="list-group-flush">
         {orderItem.productsOrdered.map(product => (
            <ListGroupItem key={product._id}>
             <CartToProduct cartProductId={product.productId} productQuantity={product.quantity} keyOrder={keyOrder}/>
-            </ListGroupItem>
+          	</ListGroupItem>
 
         ))}
 
@@ -62,12 +62,11 @@ useEffect(() => {
     </Card>
 
   ));
-
   setOrderUser(orderArr);
 }, [order]);
 
-    return(
-          (orderUser.length === 0)
+	return(
+		  (orderUser.length === 0)
         ?
         <>
             <h1 className="text-center my-4">No Orders</h1>
@@ -77,12 +76,8 @@ useEffect(() => {
         <Container className="mt-5">
             <Row>
                 <Col>
-                    <Card >
-                        <Card.Body className="p-0">
-                             <GetEmail userId={user.id} />
-                            <Card.Text className="m-2">{orderUser}</Card.Text>
-                        </Card.Body>        
-                    </Card>
+                    <h1 className="text-center my-4">Admin Dashboard Order History</h1>
+					<Card.Text className="m-2">{orderUser}</Card.Text>
                 </Col>
             </Row>
         </Container>
