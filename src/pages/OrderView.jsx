@@ -22,7 +22,7 @@ export default function OrderView() {
         .then(res => res.json())
         .then(data => {         
         	
-            if(data.message === "Cart not found"){
+            if(data.error === "No orders found"){
                 setOrder([])
             } else {
                 setOrder(data.orders);
