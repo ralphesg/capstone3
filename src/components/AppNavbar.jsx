@@ -9,18 +9,16 @@ import '../style.css';
 export default function AppNavbar() {
     const { user } = useContext(UserContext);
 
-
-
     return (
-        <Navbar expand="lg" className="logo">
+        <Navbar expand="lg" className="nav">
             <Container>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle aria-controls="basic-navbar-nav" className="navToggle" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
+                    <Nav className="navlink">
                         <Nav.Link as={NavLink} to="/">Home</Nav.Link>
                         <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
                     </Nav>
-                    <Nav>
+                    <Nav className="navlink">
                         {user.id !== null && user.id !== undefined ? (
                             user.isAdmin ? (
                                 <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
