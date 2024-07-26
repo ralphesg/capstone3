@@ -1,34 +1,41 @@
-import { useState } from "react"
-import { Button, Form, Modal } from "react-bootstrap"
-import Swal from "sweetalert2"
+import { useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
+import Swal from "sweetalert2";
+import '../style.css';
 
 export default function UpdateProduct({ product, fetchData }) {
-  const [productId, setProductId] = useState("");
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
-  const [price, setPrice] = useState("")
-  const [showEdit, setShowEdit] = useState(false)
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [showEdit, setShowEdit] = useState(false);
 
   const openEdit = () => {
-    setShowEdit(true)
-  }
+       fetch(`http://localhost:4002/b2/products/${product}`)
+       .then(res => res.json())
+       .then(data => {
+         setName(data.product.name);
+         setDescription(data.product.description);
+         setPrice(data.product.price);
+       })
+       setShowEdit(true);
+  };
 
   const closeEdit = () => {
-    setShowEdit(false)
-  }
+    setShowEdit(false);
+  };
 
   const updateProduct = (e) => {
-    e.preventDefault()
-    fetch(`http://localhost:4002/b2/products/${product}/update`, {
+    e.preventDefault();
+    fetch(`http://localhost:4002/b2/products/${product._id}/update`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-         name: name,
-         description: description,
-         price: price
+        name: name,
+        description: description,
+        price: price,
       }),
     })
       .then((res) => res.json())
@@ -38,18 +45,24 @@ export default function UpdateProduct({ product, fetchData }) {
             title: "Success!",
             icon: "success",
             text: "Product Successfully updated",
-          })
+            customClass: {
+              confirmButton: 'sweet-warning',
+            },
+          });
         } else {
           Swal.fire({
             title: "Error!",
             icon: "error",
             text: "Please try again",
-          })
+            customClass: {
+              confirmButton: 'sweet-warning',
+            },
+          });
         }
-        fetchData()
-        closeEdit()
-      })
-  }
+        fetchData();
+        closeEdit();
+      });
+  };
 
   return (
     <>
@@ -102,5 +115,5 @@ export default function UpdateProduct({ product, fetchData }) {
         </Form>
       </Modal>
     </>
-  )
+  );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Form,Button } from 'react-bootstrap';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import '../style.css';
 
 import UserContext from '../context/UserContext';
 
@@ -49,6 +50,9 @@ export default function AddProduct(){
                     title: "Product Creation Error",
                     icon: "error",
                     text: data.error,
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
 
             } else if (data.success === true) {
@@ -61,6 +65,9 @@ export default function AddProduct(){
                     title: "Course Creation Successful",
                     icon: "success",
                     text: "Course Added successfully.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
 
                 navigate("/products");
@@ -72,6 +79,9 @@ export default function AddProduct(){
                     title: "Product Creation Error",
                     icon: "error",
                     text: "Unsuccessful Product Creation.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
 
             }

@@ -3,6 +3,7 @@ import { Container, Card, Button, Row, Col, InputGroup, FormControl  } from 'rea
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import Swal from 'sweetalert2';
+import '../style.css';
 
 export default function ProductView(){
 
@@ -38,7 +39,10 @@ export default function ProductView(){
 				Swal.fire({
 					title: "Error adding item to cart",
 					icon: "error",
-					text: data.error
+					text: data.error,
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
 				});
 
 			}else if(data.message === "Item added to cart successfully"){
@@ -46,7 +50,10 @@ export default function ProductView(){
                 Swal.fire({
                     title: "Item added to cart successfully",
                     icon: "success",
-                    text: `Total items in cart: ${data.cart.cartItems.length}`
+                    text: `Total items in cart: ${data.cart.cartItems.length}`,
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
       			});
 
 				navigate("/products");
@@ -56,7 +63,10 @@ export default function ProductView(){
 				Swal.fire({
 					title: "Error",
 					icon: "error",
-					text: "Something went wrong. Please try again."
+					text: "Something went wrong. Please try again.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
 				});
 
 			}

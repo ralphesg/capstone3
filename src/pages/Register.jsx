@@ -53,7 +53,10 @@ export default function Register() {
                 Swal.fire({
                     title: "Registration Successful",
                     icon: "success",
-                    text: "Thank you for registering!"
+                    text: "Thank you for registering!",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    },
                 }).then(() => {
                     navigate('/login');
                 });
@@ -62,25 +65,37 @@ export default function Register() {
                 Swal.fire({
                     title: "Invalid Email Format",
                     icon: "error",
-                    text: "Invalid email format."
+                    text: "Invalid email format.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 })
             }else if(data.error === "Mobile number invalid"){
                 Swal.fire({
                     title: "Mobile Number Invalid",
                     icon: "error",
-                    text: "Invalid mobile number."
+                    text: "Invalid mobile number.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 })
             }else if(data.error === "Password must be atleast 8 characters"){
                 Swal.fire({
                     title: "Password Invalid",
                     icon: "error",
-                    text: "Password must be atleast 8 characters long."
+                    text: "Password must be atleast 8 characters long.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 })
             }else{
                 Swal.fire({
                     title: "Something went wrong.",
                     icon: "error",
-                    text: "Please try again later or contact us for assistance."
+                    text: "Please try again later or contact us for assistance.",
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
             }
         })
@@ -167,10 +182,10 @@ export default function Register() {
                  />
              </Form.Group>
 
-             {isActive ?
-                 <Button variant="success" type="submit" id="submitBtn" className="mt-3">Register Now</Button>
-                 :
-                 <Button variant="success" type="submit" id="submitBtn" className="mt-3" disabled>Register Now</Button>
+             {isActive ? 
+               <Button className="btn mt-3" variant="success" type="submit" id="submitBtn">Register Now</Button> 
+               : 
+               <Button className="btn mt-3" variant="success" type="submit" id="submitBtn" disabled>Register Now</Button>
              }
          </Form>
      </div>
