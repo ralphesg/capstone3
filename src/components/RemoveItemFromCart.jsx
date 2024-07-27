@@ -56,6 +56,6 @@
      }
 
      return (
-         <Button className="btn" variant="danger" size="sm" onClick={removeToggle}>Remove</Button>
+         <Button className="btnRemove" variant="danger" size="sm" onClick={removeToggle}>Remove</Button>
      )
  }

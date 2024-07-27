@@ -1,6 +1,7 @@
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import '../style.css';
 
 export default function Checkout({fetchCart}) {
 
@@ -27,6 +28,9 @@ export default function Checkout({fetchCart}) {
                 Swal.fire({
                     title: 'Order Success',
                     icon: 'success',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
 
                 navigate("/order");
@@ -35,7 +39,10 @@ export default function Checkout({fetchCart}) {
                 Swal.fire({
                     title: 'Something Went Wrong',
                     icon: 'error',
-                    text: 'Please Try again'
+                    text: 'Please Try again',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
                 });
             }
           fetchCart();
@@ -44,7 +51,10 @@ export default function Checkout({fetchCart}) {
             Swal.fire({
                 title: 'Error',
                 icon: 'error',
-                text: 'Failed to Order products. Please try again later.'
+                text: 'Failed to Order products. Please try again later.',
+                    customClass: {
+                        confirmButton: 'sweet-warning'
+                    }
             });
         }
     }

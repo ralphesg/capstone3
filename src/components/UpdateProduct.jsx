@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import '../style.css';
@@ -66,7 +66,7 @@ export default function UpdateProduct({ product, fetchData }) {
 
   return (
     <>
-      <Button variant="primary" size="sm" onClick={openEdit}>
+      <Button className="btnUpdate" variant="primary" size="sm" onClick={openEdit}>
         Update
       </Button>
 
