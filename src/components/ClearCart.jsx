@@ -61,7 +61,7 @@ export default function ClearCart({ fetchCart }) {
         <Container className="d-flex">
             <Row>
                 <Col>
-                <Button className="btn" variant="danger" size="sm" onClick={clearCart}>Clear Cart</Button>
+                <Button className="btnClearCart" variant="danger" size="sm" onClick={clearCart}>Clear Cart</Button>
                 </Col>
             </Row>
         </Container>

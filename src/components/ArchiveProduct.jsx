@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import '../style.css';
@@ -107,9 +108,9 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
     return (
         <>
             {isActive ?
-                <Button className="button-archive" variant="danger" size="sm" onClick={() => archiveToggle(product)}>Archive</Button>
+                <Button className="btnArchive" variant="danger" size="sm" onClick={() => archiveToggle(product)}>Archive</Button>
                 :
-                <Button className="button-activate" variant="success" size="sm" onClick={() => activateToggle(product)}>Activate</Button>
+                <Button className="btnActivate" variant="success" size="sm" onClick={() => activateToggle(product)}>Activate</Button>
             }
         </>
     )

@@ -15,6 +15,34 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Add a higher specificity rule to override the custom styles if needed */
+button.btnArchive, button.btnClearCart, button.btnRemove {
+    background-color: #f31c11 !important;
+    color: black !important;
+    border: #f31c11 !important;
+    font-weight: 500 !important;
+}
+
+button.btnActivate {
+    background-color: green !important;
+    color: black !important;
+    border: green !important;
+    font-weight: 500 !important;
+}
+
+button.btnActivate:hover, button.btnUpdate:hover, button.btnArchive:hover {
+    background-color: lightyellow; !important;
+    border-color: lightyellow; !important;
+    color: black; !important;
+}
+
+button.btnUpdate {
+    background-color: #2742f3 !important;
+    color: black !important;
+    border: #2742f3 !important;
+    font-weight: 500 !important;
+}
+
 .register-container {
     min-height: 100vh;
     display: flex;
@@ -40,7 +68,7 @@ body {
 
 .nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: #333;
     font-size: 1rem;
@@ -165,20 +193,6 @@ body {
     transform: none;
 }
 
-.button-archive {
-    background-color: red !important;
-    transition: all 0.3s;
-    border: 0;
-    font-weight: 500 !important;
-}
-
-.button-activate {
-    background-color: blue !important;
-    transition: all 0.3s;
-    border: 0;
-    font-weight: 500 !important;
-}
-
 .carousel-item img {
     width: 100vw;
     max-width: 100%;
@@ -217,11 +231,23 @@ body {
     .carousel-header {
         font-size: 1.75rem; /* h3 size */
     }
+
+    .red-content a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) { /* SM */
     .carousel-header {
         font-size: 1.75rem; /* h3 size */
+    }
+
+    .red-content a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -248,7 +274,7 @@ body {
     background-color: orangered !important;
     border-color: orangered !important;
     transition: all 0.3s;
-    z-index: 5000;
+    z-index: 20;
     position: relative;
 }
 
