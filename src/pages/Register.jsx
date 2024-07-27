@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Col, Row, Container } from 'react-bootstrap';
 import { useNavigate, Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../context/UserContext';
@@ -117,78 +117,86 @@ export default function Register() {
         (user.id !== null && user.id !== undefined) ?
      <Navigate to="/login" />
      :
-     <div className="register-container">
-         <Form onSubmit={(e) => registerUser(e)} className="register-form">
-             <h1 className="text-center">Register</h1>
-             <p className="text-center">Create your account. It’s free and only takes a minute.</p>
-             <Form.Group>
-             <Form.Label>First Name </Form.Label>
-                 <Form.Control
-                     id="txtFirstName"
-                     type="text"
-                     required
-                     value={firstName}
-                     onChange={e => { setFirstName(e.target.value) }}
-                 />
-             </Form.Group>
-             <Form.Group>
-             <Form.Label>Last Name </Form.Label>
-                 <Form.Control
-                     id="txtLastName"
-                     type="text"
-                     required
-                     value={lastName}
-                     onChange={e => { setLastName(e.target.value) }}
-                 />
-             </Form.Group>
-             <Form.Group>
-             <Form.Label>Email Address </Form.Label>
-                 <Form.Control
-                     id="txtEmail"
-                     type="email"
-                     required
-                     value={email}
-                     onChange={e => { setEmail(e.target.value) }}
-                 />
-             </Form.Group>
-             <Form.Group>
-             <Form.Label>Mobile No </Form.Label>
-                 <Form.Control
-                     id="txtMobileNo"
-                     type="mobileNo"
-                     required
-                     value={mobileNo}
-                     onChange={e => { setMobileNo(e.target.value) }}
-                 />
-             </Form.Group>
-             <Form.Group>
-             <Form.Label>Password </Form.Label>
-                 <Form.Control
-                     id="txtPassword"
-                     type="password"
-                     required
-                     value={password}
-                     onChange={e => { setPassword(e.target.value) }}
-                 />
-             </Form.Group>
-             <Form.Group>
-             <Form.Label>Confirm Password </Form.Label>
-                 <Form.Control
-                     id="txtConfirmPassword"
-                     type="password"
-                     required
-                     value={confirmPassword}
-                     onChange={e => { setConfirmPassword(e.target.value) }}
-                 />
-             </Form.Group>
+     <Container className="register-container d-flex justify-content-center">
+         <Row className="w-100">
+            <Col sx={3} md={4} lg={5} className="mx-auto">
+                 <Form onSubmit={(e) => registerUser(e)} className="register-form">
+                     <h2 className="text-center">Register</h2>
+                     <p className="text-center">Create your account. It’s free and only takes a minute.</p>
+                     <Col className="col mx-3">
+                     <Form.Group>
+                     <Form.Label>First Name </Form.Label>
+                         <Form.Control
+                             id="txtFirstName"
+                             type="text"
+                             required
+                             value={firstName}
+                             onChange={e => { setFirstName(e.target.value) }}
+                         />
+                     </Form.Group>
+                     <Form.Group>
+                     <Form.Label>Last Name </Form.Label>
+                         <Form.Control
+                             id="txtLastName"
+                             type="text"
+                             required
+                             value={lastName}
+                             onChange={e => { setLastName(e.target.value) }}
+                         />
+                     </Form.Group>
+                     <Form.Group>
+                     <Form.Label>Email Address </Form.Label>
+                         <Form.Control
+                             id="txtEmail"
+                             type="email"
+                             required
+                             value={email}
+                             onChange={e => { setEmail(e.target.value) }}
+                         />
+                     </Form.Group>
+                     </Col>
+                     <Col className="col mx-3">
+                     <Form.Group>
+                     <Form.Label>Mobile No </Form.Label>
+                         <Form.Control
+                             id="txtMobileNo"
+                             type="mobileNo"
+                             required
+                             value={mobileNo}
+                             onChange={e => { setMobileNo(e.target.value) }}
+                         />
+                     </Form.Group>
+                     <Form.Group>
+                     <Form.Label>Password </Form.Label>
+                         <Form.Control
+                             id="txtPassword"
+                             type="password"
+                             required
+                             value={password}
+                             onChange={e => { setPassword(e.target.value) }}
+                         />
+                     </Form.Group>
+                     <Form.Group>
+                     <Form.Label>Confirm Password </Form.Label>
+                         <Form.Control
+                             id="txtConfirmPassword"
+                             type="password"
+                             required
+                             value={confirmPassword}
+                             onChange={e => { setConfirmPassword(e.target.value) }}
+                         />
+                     </Form.Group>
+                     </Col>
 
-             {isActive ? 
-               <Button className="btn mt-3" variant="success" type="submit" id="submitBtn">Register Now</Button> 
-               : 
-               <Button className="btn mt-3" variant="success" type="submit" id="submitBtn" disabled>Register Now</Button>
-             }
-         </Form>
-     </div>
+                     {isActive ? 
+                       <Button className="btn mt-3" variant="success" type="submit" id="submitBtn">Register Now</Button> 
+                       : 
+                       <Button className="btn mt-3" variant="success" type="submit" id="submitBtn" disabled>Register Now</Button>
+                     }
+                 </Form>
+            </Col>
+        </Row>
+    </Container>
      
     )
 }
