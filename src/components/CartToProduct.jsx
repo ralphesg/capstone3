@@ -8,7 +8,7 @@ export default function CartToProduct({cartProductId, keyOrder, productQuantity}
 
 useEffect(() => {
 		
-		fetch(`http://localhost:4002/b2/products/${cartProductId}`)
+		fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/${cartProductId}`)
 		.then(res => res.json())
 		.then(data => {
 

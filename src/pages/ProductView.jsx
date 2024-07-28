@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import Swal from 'sweetalert2';
 import '../style.css';
+import AddToCart from '../components/AddToCart'
 
 export default function ProductView(){
 
@@ -16,68 +17,10 @@ export default function ProductView(){
 	const [quantity, setQuantity] = useState(1);
 	const [cart, setCart] = useState([]);
 
-	function addToCart(productId){
-		fetch('http://localhost:4002/b2/cart/add-to-cart', {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("token")}`
-
-			},
-			body: JSON.stringify({
-				productId: productId,
-				quantity: quantity
-			})
-		})
-
-		.then(res => res.json())
-		.then(data => {
-			
-			
-			if(data.message === 'Error adding item to cart'){
-				
-				Swal.fire({
-					title: "Error adding item to cart",
-					icon: "error",
-					text: data.error,
-                    customClass: {
-                        confirmButton: 'sweet-warning'
-                    }
-				});
-
-			}else if(data.message === "Item added to cart successfully"){
-
-                Swal.fire({
-                    title: "Item added to cart successfully",
-                    icon: "success",
-                    text: `Total items in cart: ${data.cart.cartItems.length}`,
-                    customClass: {
-                        confirmButton: 'sweet-warning'
-                    }
-      			});
-
-				navigate("/products");
-
-			}else{
-
-				Swal.fire({
-					title: "Error",
-					icon: "error",
-					text: "Something went wrong. Please try again.",
-                    customClass: {
-                        confirmButton: 'sweet-warning'
-                    }
-				});
-
-			}
-		})
-	}
-
-
 	useEffect(() => {
 		
 
-		fetch(`http://localhost:4002/b2/products/${productId}`)
+		fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/${productId}`)
 		.then(res => res.json())
 		.then(data => {
 
@@ -112,8 +55,8 @@ export default function ProductView(){
     							<span className="custom-price ms-2">Price: </span>
     							<span className="custom-card-price">₱{price}</span>
 							</Card.Text>
-							<Card.Text className="m-2">Quantity</Card.Text>
-							   <InputGroup className="ms-3 mb-3 d-flex">
+							<Card.Text className="m-2">Quantity:</Card.Text>
+							   <InputGroup className="mb-3 d-flex justify-content-center">
                                 <Button variant="btn btn-dark" onClick={decrementQuantity}>-</Button>
                                 <FormControl
                                     aria-label="Quantity"
@@ -129,7 +72,7 @@ export default function ProductView(){
                            
                               { (user.id !== null && user.id !== undefined)
                               	? 
-                    			<Button variant="primary" block="true" onClick={() => addToCart(productId)}>Add to Cart</Button>
+                                <AddToCart productId={productId} quantity={quantity}/>
                     			: 
                     			
                     			<Link to={`/login`} className="btn btn-primary ">Login to Add to Cart</Link>

@@ -1,26 +1,40 @@
 import { useEffect, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import Swal from 'sweetalert2';
 import UserContext from '../context/UserContext';
 
-export default function Logout(){
+export default function Logout() {
+    const { setUser, unsetUser } = useContext(UserContext);
+    const navigate = useNavigate(); 
 
-	const { setUser, unsetUser } = useContext(UserContext);
+    useEffect(() => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are about to log out!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, log out',
+            cancelButtonText: 'No, cancel',
+            customClass: {
+                confirmButton: 'sweet-confirm',
+                cancelButton: 'sweet-cancel'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                unsetUser();
+                setUser({
+                    id: null,
+                    isAdmin: null,
+                });
+                localStorage.clear(); 
+                navigate('/login'); 
+            } else if (result.isDismissed) {
+                
+                navigate('/'); 
+            }
+        });
+    }, [setUser, unsetUser, navigate]); 
 
-	unsetUser();
 
-	// Placing the "setUser" function inside of a useEffect is necessary because a state of another component cannot be updated while trying to render a different component
-	// By adding the useEffect, this will allow the Logout page to render first before triggering the useEffect which changes the state of our user
-	useEffect(() => {
-		setUser({
-			id: null,
-			isAdmin: null,
-			email: null
-		})
-	})
-	// The "localStorage.clear()" method allows us to clear the information in the localStorage ensuring that there are no information stored in our browser
-	// localStorage.clear();
-	// Redirect back to login
-	return (
-		<Navigate to='/login' />
-	)
+    return null;
 }

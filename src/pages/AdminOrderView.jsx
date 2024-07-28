@@ -15,7 +15,7 @@ export default function OrderView() {
     const token = localStorage.getItem('token');
 
     const fetchOrder = () => {
-        let fetchUrl = "http://localhost:4002/b2/orders/all-orders"
+        let fetchUrl = "http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/orders/all-orders"
 
         fetch(fetchUrl, {
             headers: {
@@ -24,7 +24,6 @@ export default function OrderView() {
         })
         .then(res => res.json())
         .then(data => {         
-        	console.log(data)
             if(data.error === "No orders found"){
                 setOrder([])
             } else {
@@ -45,20 +44,20 @@ const keyOrder = "key"
   const orderArr = order.map(orderItem => (
     <Card key={orderItem._id} style={{ marginBottom: '20px' }}>
     <GetEmail userId={orderItem.userId}/>
-    <Card.Body>
-      <Card.Text>Purchased on: {new Date(orderItem.orderedOn).toLocaleString()}</Card.Text>
+    <Card.Body style={{ backgroundColor: 'orange' }}>
+      <Card.Text style={{ color: 'white' }}>Purchased on: {new Date(orderItem.orderedOn).toLocaleString()}</Card.Text>
        <ListGroup className="list-group-flush">
         {orderItem.productsOrdered.map(product => (
            <ListGroupItem key={product._id}>
             <CartToProduct cartProductId={product.productId} productQuantity={product.quantity} keyOrder={keyOrder}/>
-          	</ListGroupItem>
+              </ListGroupItem>
 
         ))}
 
        </ListGroup>
-       <Card.Text>Total: <span style={{ color: 'orange' }}>₱{orderItem.totalPrice}</span></Card.Text>
+        <Card.Text className="my-2">Total: <span style={{ color: 'red' }}>₱{orderItem.totalPrice}</span></Card.Text>
        </Card.Body>
-      
+
     </Card>
 
   ));

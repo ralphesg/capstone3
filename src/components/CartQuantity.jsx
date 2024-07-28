@@ -8,7 +8,7 @@ export default function CartQuantity({ cartQuantity, cartProductId, fetchCart })
         
         const updateCartQuantity = async () => {
             try {
-                const response = await fetch(`http://localhost:4002/b2/cart/update-cart-quantity`, {
+                const response = await fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/cart/update-cart-quantity`, {
                     method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export default function CartQuantity({ cartQuantity, cartProductId, fetchCart })
                     },
                     body: JSON.stringify({
                         productId: cartProductId,
-                        quantity: quantity // Use current state value of quantity
+                        quantity: quantity 
                     })
                 });
                 if (!response.ok) {

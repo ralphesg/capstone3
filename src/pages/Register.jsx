@@ -24,7 +24,7 @@ export default function Register() {
         // Prevents the page redirection via form submission
         e.preventDefault();
 
-        fetch("http://localhost:4002/b2/users/register", {
+        fetch("http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/users/register", {
 
             method: 'POST',
             headers: {
@@ -160,7 +160,7 @@ export default function Register() {
                      <Form.Label>Mobile No </Form.Label>
                          <Form.Control
                              id="txtMobileNo"
-                             type="mobileNo"
+                             type="number"
                              required
                              value={mobileNo}
                              onChange={e => { setMobileNo(e.target.value) }}
@@ -191,7 +191,7 @@ export default function Register() {
                      {isActive ? 
                        <Button className="btn mt-3" variant="success" type="submit" id="submitBtn">Register Now</Button> 
                        : 
-                       <Button className="btn mt-3" variant="success" type="submit" id="submitBtn" disabled>Register Now</Button>
+                       <Button className="btn mt-3" variant="danger" type="submit" id="submitBtn" disabled>Register Now</Button>
                      }
                  </Form>
             </Col>

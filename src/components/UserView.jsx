@@ -23,7 +23,7 @@ export default function UserView({ productsData }) {
 
     return (
         (productsData.length <= 0 ) ?
-            <p>No active products available.</p>
+            <p>Loading...</p>
             :
             <Container className="container">
                 <h2 className="page-title text-center mt-4">Our Products</h2>
@@ -55,7 +55,7 @@ export default function UserView({ productsData }) {
                                     <Card.Text className="custom-card-price">₱{product.price}</Card.Text>
                                 </Card.Body>
                                 <Card.Footer>
-                                    <Link to={`/products/${product._id}`} className="btn btn-primary w-100" id="buttonProductDetails">Details</Link>
+                                    <Link to={`/products/${product._id}`} className="btn btn-danger w-100" id="buttonProductDetails">Details</Link>
                                 </Card.Footer>
                             </Card>
                         </Col>

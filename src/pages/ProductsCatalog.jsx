@@ -10,7 +10,7 @@ export default function ProductsCatalog() {
     const {user} = useContext(UserContext);
 
     const fetchData = () => {
-        let fetchUrl = user.isAdmin === true ? "http://localhost:4002/b2/products/all" : "http://localhost:4002/b2/products/active"
+        let fetchUrl = user.isAdmin === true ? "http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/all" : "http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/active"
 
         fetch(fetchUrl, {
             headers: {

@@ -12,7 +12,7 @@ export default function Profile() {
 
     useEffect(() => {
         if (user && user.id) {
-            fetch(`http://localhost:4002/b2/users/details-specific/${user.id}`, {
+            fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/users/details-specific/${user.id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

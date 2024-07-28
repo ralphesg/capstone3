@@ -5,9 +5,25 @@ import '../style.css';
 
 export default function ClearCart({ fetchCart }) {
 
-    const clearCart = async () => {
+
+const clearCart = async () => {
+
+    const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "This action will clear all items from your cart.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, clear it!',
+        cancelButtonText: 'No, cancel',
+        customClass: {
+            confirmButton: 'sweet-confirm',
+            cancelButton: 'sweet-cancel'
+        }
+    });
+
+    if (result.isConfirmed) {
         try {
-            const response = await fetch('http://localhost:4002/b2/cart/clear-cart', {
+            const response = await fetch('http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/cart/clear-cart', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +70,18 @@ export default function ClearCart({ fetchCart }) {
                 }
             });
         }
+    } else {
+        Swal.fire({
+            title: 'Cancelled',
+            text: 'Your cart was not cleared.',
+            icon: 'info',
+            customClass: {
+                confirmButton: 'sweet-warning'
+            }
+        });
     }
+}
+
 
     return (
         <>

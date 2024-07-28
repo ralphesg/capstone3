@@ -22,26 +22,29 @@ export default function AppNavbar() {
                 <Navbar.Brand as={Link} to="/">
                     <img
                         src={logo}
-                        width="120"
-                        height="28"
+                        width="40"
+                        height="25"
                         className="d-inline-block align-top"
                         alt="Logo"
                     />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" className="navToggle" />
                 <Navbar.Collapse id="basic-navbar-nav">
+                    {/* Left-aligned items */}
                     <Nav className="me-auto">
                         <Nav.Link as={NavLink} to="/"><IoHomeOutline /> Home</Nav.Link>
                         <Nav.Link as={NavLink} to="/products"><PiTShirtDuotone /> Products</Nav.Link>
+                    </Nav>
 
+                    <Nav className="ms-auto">
                         {user && user.id !== null && user.id !== undefined ? (
                             user.isAdmin ? (       
-                                <Nav.Link as={Link} to="/logout"><LuLogOut /> Logout</Nav.Link>
+                                <Nav.Link as={NavLink} to="/logout"><LuLogOut /> Logout</Nav.Link>
                             ) : (
-                                <>  
-                                    <Nav.Link as={NavLink} to="/profile"><CgProfile /> Profile</Nav.Link>
+                                <>
                                     <Nav.Link as={NavLink} to="/cart"><BsCart3 /> Cart</Nav.Link>
                                     <Nav.Link as={NavLink} to="/order"><LuClipboardList /> Order</Nav.Link>
+                                    <Nav.Link as={NavLink} to="/profile"><CgProfile /> Profile</Nav.Link>
                                     <Nav.Link as={NavLink} to="/logout"><LuLogOut /> Logout</Nav.Link>
                                 </>
                             )
@@ -57,4 +60,3 @@ export default function AppNavbar() {
         </Navbar>
     );
 }
-

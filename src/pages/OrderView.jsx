@@ -13,7 +13,7 @@ export default function OrderView() {
     const {user} = useContext(UserContext);
    
     const fetchOrder = () => {
-        let fetchUrl = "http://localhost:4002/b2/orders/my-orders"
+        let fetchUrl = "http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/orders/my-orders"
 
         fetch(fetchUrl, {
             headers: {
@@ -78,7 +78,7 @@ useEffect(() => {
             <Row>
                 <Col>
                     <Card >
-                        <Card.Body className="p-0">
+                        <Card.Body className="p-0" style={{ backgroundColor: 'orange' }}>
                              <GetEmail userId={user.id} />
                             <Card.Text className="m-2">{orderUser}</Card.Text>
                         </Card.Body>        

@@ -24,7 +24,7 @@ export default function AddProduct(){
         let token = localStorage.getItem('token');
         console.log(token);
 
-        fetch('http://localhost:4002/b2/products/',{
+        fetch('http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/',{
 
             method: 'POST',
             headers: {
@@ -62,9 +62,9 @@ export default function AddProduct(){
                 setPrice(0);
 
                 Swal.fire({
-                    title: "Course Creation Successful",
+                    title: "Add Product Successful",
                     icon: "success",
-                    text: "Course Added successfully.",
+                    text: "Product Added successfully.",
                     customClass: {
                         confirmButton: 'sweet-warning'
                     }

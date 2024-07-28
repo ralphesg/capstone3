@@ -22,52 +22,75 @@ export default function ResetPassword() {
       });
       return;
     }
-
-    try {
-      const token = localStorage.getItem('token'); // Replace with your actual JWT token
-      const response = await fetch(`http://localhost:4002/b2/users/update-password`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ newPassword }),
-      });
-
-      if (response.ok) {
-        Swal.fire({
-          title: "Reset Password Successful",
-          icon: "success",
-          text: "Password reset successfully.",
-          customClass: {
-            confirmButton: 'sweet-warning'
-          }
-        });
-
-        setPassword('');
-        setConfirmPassword('');
-
-      } else {
-        const errorData = await response.json();
-        Swal.fire({
-          title: "Reset Password Failed",
-          icon: "error",
-          text: "Failed to reset password. Please try again.",
-          customClass: {
-            confirmButton: 'sweet-warning'
-          }
-        });
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you want to reset your password?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, reset it!',
+      cancelButtonText: 'No, cancel',
+      customClass: {
+        confirmButton: 'sweet-confirm',
+        cancelButton: 'sweet-cancel'
       }
-    } catch (error) {
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/users/update-password`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ newPassword }),
+        });
+
+        if (response.ok) {
+          Swal.fire({
+            title: "Reset Password Successful",
+            icon: "success",
+            text: "Password reset successfully.",
+            customClass: {
+              confirmButton: 'sweet-warning'
+            }
+          });
+
+          setPassword('');
+          setConfirmPassword('');
+
+        } else {
+          const errorData = await response.json();
+          Swal.fire({
+            title: "Reset Password Failed",
+            icon: "error",
+            text: "Failed to reset password. Please try again.",
+            customClass: {
+              confirmButton: 'sweet-warning'
+            }
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Internal Server Error",
+          icon: "error",
+          text: "Internal server error.",
+          customClass: {
+            confirmButton: 'sweet-warning'
+          }
+        });
+        console.error(error);
+      }
+    } else if (result.isDismissed) {
       Swal.fire({
-        title: "Internal Server Error",
-        icon: "error",
-        text: "Internal server error.",
+        title: 'Cancelled',
+        text: 'Password reset was cancelled.',
+        icon: 'info',
         customClass: {
           confirmButton: 'sweet-warning'
         }
       });
-      console.error(error);
     }
   };
 

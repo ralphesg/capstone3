@@ -7,9 +7,25 @@ export default function Checkout({fetchCart}) {
 
 	const navigate = useNavigate();
 
-    const checkOut = async (product) => {
+const checkOut = async (product) => {
+
+    const result = await Swal.fire({
+        title: 'Confirm Checkout',
+        text: "Are you sure you want to proceed with the checkout?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, checkout',
+        cancelButtonText: 'No, cancel',
+        customClass: {
+            confirmButton: 'sweet-confirm',
+            cancelButton: 'sweet-cancel'
+        }
+    });
+
+    if (result.isConfirmed) {
+        // User confirmed, proceed with checkout
         try {
-            const response = await fetch(`http://localhost:4002/b2/orders/checkout`, {
+            const response = await fetch('http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/orders/checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,37 +44,48 @@ export default function Checkout({fetchCart}) {
                 Swal.fire({
                     title: 'Order Success',
                     icon: 'success',
+                    text: 'Your order has been placed successfully.',
                     customClass: {
                         confirmButton: 'sweet-warning'
                     }
                 });
 
-                navigate("/order");
+                navigate("/order"); 
 
             } else {
                 Swal.fire({
                     title: 'Something Went Wrong',
                     icon: 'error',
-                    text: 'Please Try again',
+                    text: 'Please try again.',
                     customClass: {
                         confirmButton: 'sweet-warning'
                     }
                 });
             }
-          fetchCart();
+            fetchCart(); 
+
         } catch (error) {
             console.error("Error:", error);
             Swal.fire({
                 title: 'Error',
                 icon: 'error',
-                text: 'Failed to Order products. Please try again later.',
-                    customClass: {
-                        confirmButton: 'sweet-warning'
-                    }
+                text: 'Failed to order products. Please try again later.',
+                customClass: {
+                    confirmButton: 'sweet-warning'
+                }
             });
         }
+    } else if (result.isDismissed) {
+        Swal.fire({
+            title: 'Cancelled',
+            text: 'Your checkout was cancelled.',
+            icon: 'info',
+            customClass: {
+                confirmButton: 'sweet-warning'
+            }
+        });
     }
-
+}
 
     return (
 
