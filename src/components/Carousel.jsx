@@ -33,9 +33,9 @@ function CarouselPage() {
 
             <div className="red">
                 <div className="red-content">
-                    <h2 className="py-4"><a href="/products">New Arrivals ></a></h2>
-                    <h2 className="py-4"><a href="/products">Top Brands ></a></h2>
-                    <h2 className="py-4"><a href="/products">Latest Promos ></a></h2>
+                    <h2 className="py-4"><a href="/products">New Arrivals &gt;</a></h2>
+                    <h2 className="py-4"><a href="/products">Top Brands &gt;</a></h2>
+                    <h2 className="py-4"><a href="/products">Latest Promos &gt;</a></h2>
                 </div>
             </div>
 

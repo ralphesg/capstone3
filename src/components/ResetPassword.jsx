@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Form, Button, Container } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import '../style.css';
 
-const ResetPassword = () => {
+export default function ResetPassword() {
   const [newPassword, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -10,14 +12,21 @@ const ResetPassword = () => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      setMessage('Passwords do not match');
+      Swal.fire({
+        title: "Password and Confirm Password Do Not Match",
+        icon: "error",
+        text: "Please try again.",
+        customClass: {
+          confirmButton: 'sweet-warning'
+        }
+      });
       return;
     }
 
     try {
       const token = localStorage.getItem('token'); // Replace with your actual JWT token
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/reset-password`, {
-        method: 'PUT',
+      const response = await fetch(`http://localhost:4002/b2/users/update-password`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -26,56 +35,80 @@ const ResetPassword = () => {
       });
 
       if (response.ok) {
-        setMessage('Password reset successfully');
+        Swal.fire({
+          title: "Reset Password Successful",
+          icon: "success",
+          text: "Password reset successfully.",
+          customClass: {
+            confirmButton: 'sweet-warning'
+          }
+        });
+
         setPassword('');
         setConfirmPassword('');
+
       } else {
         const errorData = await response.json();
-        setMessage(errorData.message);
+        Swal.fire({
+          title: "Reset Password Failed",
+          icon: "error",
+          text: "Failed to reset password. Please try again.",
+          customClass: {
+            confirmButton: 'sweet-warning'
+          }
+        });
       }
     } catch (error) {
-      setMessage('An error occurred. Please try again.');
+      Swal.fire({
+        title: "Internal Server Error",
+        icon: "error",
+        text: "Internal server error.",
+        customClass: {
+          confirmButton: 'sweet-warning'
+        }
+      });
       console.error(error);
     }
   };
 
   return (
-    <div className="container">
-      <h2>Reset Password</h2>
-      <form onSubmit={handleResetPassword}>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            New Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={newPassword}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="confirmPassword" className="form-label">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        {message && <div className="alert alert-danger">{message}</div>}
-        <button type="submit" className="btn btn-primary">
-          Reset Password
-        </button>
-      </form>
-    </div>
+    <Container className="d-flex justify-content-center align-items-center">
+      <div className="w-100" style={{ maxWidth: '400px' }}>
+        <h2 className="text-center mb-4">Reset Password</h2>
+        <form onSubmit={handleResetPassword}>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              New Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={newPassword}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="confirmPassword" className="form-label">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
+          {message && <div className="alert alert-danger">{message}</div>}
+          <button type="submit" className="btn btn-primary w-100">
+            Reset Password
+          </button>
+        </form>
+      </div>
+    </Container>
   );
-};
+}
 
-export default ResetPassword;
