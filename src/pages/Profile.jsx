@@ -1,80 +1,73 @@
 import { useState, useEffect, useContext } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Button, Col, Row, Container } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ResetPassword from '../components/ResetPassword';
 import UserContext from '../context/UserContext';
 import '../style.css';
 
-export default function Profile(){
-
+export default function Profile() {
     const { user } = useContext(UserContext);
-
-    const [details,setDetails] = useState({});
+    const [details, setDetails] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:4002/b2/users/details`, {
-            headers: {
-                Authorization: `Bearer ${ localStorage.getItem('token') }`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            // Set the user states values with the user details upon successful login.
-            if (typeof data !== undefined) {
-
-                setDetails(data);
-
-            } else if (data.error === "User not found") {
-
+        if (user && user.id) {
+            fetch(`http://localhost:4002/b2/users/details-specific/${user.id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    setDetails(data);
+                } else {
+                    Swal.fire({
+                        title: "Profile Error",
+                        icon: "error",
+                        text: "Something went wrong, kindly contact us for assistance.",
+                        customClass: {
+                            confirmButton: 'sweet-warning'
+                        }
+                    });
+                }
+            })
+            .catch(error => {
                 Swal.fire({
-                    title: "User Not Found",
+                    title: "Error Retrieving User Details",
                     icon: "error",
-                    text: "User not found, please check if you're logged in or contact the administrator.",
+                    text: "Unable to fetch user details. Please try again later.",
                     customClass: {
                         confirmButton: 'sweet-warning'
                     }
-                })
+                });
+                console.error(error);
+            });
+        }
+    }, [user]);
 
-            } else {
-
-                Swal.fire({
-                    title: "Profile Error",
-                    icon: "error",
-                    text: "Something went wrong, kindly contact us for assistance.",
-                    customClass: {
-                        confirmButton: 'sweet-warning'
-                    }
-                })
-
-            }
-        });
-    }, [])
+    if (!user || !user.id) {
+        return <Navigate to="/" />;
+    }
 
     return (
-        (user.id === null && user.id === undefined) ?
-            <Navigate to="/" />
-            :
-            <>
-                <Row>
-                    <Col className="mt-5 p-5 bg-primary text-white">
-                        <h1 className="mb-5 ">Profile</h1>
-                        <h2 className="mt-3">{`${details.firstName} ${details.lastName}`}</h2>
-                        <hr />
-                        <h4>Contacts</h4>
-                        <ul>
-                            <li>Email: {details.email}</li>
-                            <li>Mobile No: {details.mobileNo}</li>
-                        </ul>
-                    </Col>
-                </Row>
-                <Row className="pt-4 mt-4">
-                    <Col>
-                        <ResetPassword />
-                    </Col>
-                </Row>
-            </>
-    )
-
+        <Container className="container-profile">
+            <Row>
+                <Col className="profile-details order-md-1">
+                    <h2 className="mb-0">
+                        {details.user ? `Hi, ${details.user.firstName || ''} ${details.user.lastName || ''}!` : 'Loading...'}
+                    </h2>
+                    <hr />
+                    <h5>Contact Details:</h5>
+                    <ul>
+                        <li>Email: {details.user ? details.user.email || '' : 'Loading...'}</li>
+                        <li>Mobile No: {details.user ? details.user.mobileNo || '' : 'Loading...'}</li>
+                    </ul>
+                </Col>
+                <Col xs={12} md={4} className="reset-password order-md-2">
+                    <ResetPassword />
+                </Col>
+            </Row>
+        </Container>
+    );
 }
