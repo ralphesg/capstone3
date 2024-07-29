@@ -20,7 +20,6 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
             }
 
             const data = await response.json();
-            console.log(data);
 
             if (data.message === "Product archived successfully") {
                 Swal.fire({

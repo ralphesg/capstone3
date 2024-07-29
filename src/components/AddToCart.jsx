@@ -9,8 +9,6 @@ export default function AddtoCart({productId, quantity}){
 	const navigate = useNavigate();
 
 	function addToCart(){
-		console.log(productId)
-		console.log(quantity)
     Swal.fire({
         title: 'Are you sure?',
         text: "Do you want to add this item to your cart?",

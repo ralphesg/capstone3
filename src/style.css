@@ -451,10 +451,6 @@ button.btnUpdate {
 }
 
 
-.nav {
-    /* Add any general navbar styling here */
-}
-
 .container-navbar {
     display: flex;
     justify-content: space-between;

@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
      if (token !== null){
-          fetch('http://localhost:4002/b2/users/details', {
+          fetch('http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/users/details', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }

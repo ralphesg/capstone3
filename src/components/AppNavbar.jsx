@@ -30,7 +30,6 @@ export default function AppNavbar() {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" className="navToggle" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    {/* Left-aligned items */}
                     <Nav className="me-auto">
                         <Nav.Link as={NavLink} to="/"><IoHomeOutline /> Home</Nav.Link>
                         <Nav.Link as={NavLink} to="/products"><PiTShirtDuotone /> Products</Nav.Link>
