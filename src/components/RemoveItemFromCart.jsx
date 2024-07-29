@@ -23,7 +23,7 @@ export default function RemoveItemFromCart({ cartProductId, fetchCart }) {
         if (result.isConfirmed) {
          
             try {
-                const response = await fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/cart/${cartProductId}/remove-from-cart`, {
+                const response = await fetch(`https://capstone2-weuf.onrender.com/b2/cart/${cartProductId}/remove-from-cart`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',

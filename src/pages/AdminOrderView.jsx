@@ -15,7 +15,7 @@ export default function OrderView() {
     const token = localStorage.getItem('token');
 
     const fetchOrder = () => {
-        let fetchUrl = "http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/orders/all-orders"
+        let fetchUrl = "https://capstone2-weuf.onrender.com/b2/orders/all-orders"
 
         fetch(fetchUrl, {
             headers: {

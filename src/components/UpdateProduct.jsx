@@ -10,7 +10,7 @@ export default function UpdateProduct({ product, fetchData }) {
   const [showEdit, setShowEdit] = useState(false);
 
   const openEdit = () => {
-       fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/${product}`)
+       fetch(`https://capstone2-weuf.onrender.com/b2/products/${product}`)
        .then(res => res.json())
        .then(data => {
          setName(data.product.name);
@@ -27,7 +27,7 @@ export default function UpdateProduct({ product, fetchData }) {
   const updateProduct = (e) => {
     e.preventDefault();
     console.log(product)
-    fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/${product}/update`, {
+    fetch(`https://capstone2-weuf.onrender.com/b2/products/${product}/update`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -13,7 +13,7 @@ export default function OrderView() {
     const {user} = useContext(UserContext);
    
     const fetchOrder = () => {
-        let fetchUrl = "http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/orders/my-orders"
+        let fetchUrl = "https://capstone2-weuf.onrender.com/b2/orders/my-orders"
 
         fetch(fetchUrl, {
             headers: {

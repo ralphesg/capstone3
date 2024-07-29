@@ -13,7 +13,7 @@ export default function GetEmail ({userId}) {
     useEffect(() => {
    	 console.log(userId)
      if (token !== null){
-          fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/users/details-specific/${userId}`, {
+          fetch(`https://capstone2-weuf.onrender.com/b2/users/details-specific/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

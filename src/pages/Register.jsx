@@ -24,7 +24,7 @@ export default function Register() {
         // Prevents the page redirection via form submission
         e.preventDefault();
 
-        fetch("http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/users/register", {
+        fetch("https://capstone2-weuf.onrender.com/b2/users/register", {
 
             method: 'POST',
             headers: {

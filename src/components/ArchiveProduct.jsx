@@ -7,7 +7,7 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
 
     const archiveToggle = async (product) => {
         try {
-            const response = await fetch(`http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/products/${product}/archive`, {
+            const response = await fetch(`https://capstone2-weuf.onrender.com/b2/products/${product}/archive`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ export default function AddtoCart({productId, quantity}){
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch('http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/cart/add-to-cart', {
+            fetch('https://capstone2-weuf.onrender.com/b2/cart/add-to-cart', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

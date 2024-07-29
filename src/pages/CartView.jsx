@@ -17,7 +17,7 @@ export default function CartView() {
     const {user} = useContext(UserContext);
 
     const fetchCart = () => {
-        let fetchUrl = "http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/cart/get-cart"
+        let fetchUrl = "https://capstone2-weuf.onrender.com/b2/cart/get-cart"
 
         fetch(fetchUrl, {
             headers: {

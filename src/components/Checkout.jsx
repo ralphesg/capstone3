@@ -25,7 +25,7 @@ const checkOut = async (product) => {
     if (result.isConfirmed) {
         // User confirmed, proceed with checkout
         try {
-            const response = await fetch('http://ec2-13-59-17-101.us-east-2.compute.amazonaws.com/b2/orders/checkout', {
+            const response = await fetch('https://capstone2-weuf.onrender.com/b2/orders/checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
