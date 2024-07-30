@@ -56,7 +56,7 @@ export default function ArchiveProduct({ product, isActive, fetchData }) {
 
     const activateToggle = async (product) => {
         try {
-            const response = await fetch(`http://localhost:4002/b2/products/${product}/activate`, {
+            const response = await fetch(`https://capstone2-weuf.onrender.com/b2/products/${product}/activate`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
