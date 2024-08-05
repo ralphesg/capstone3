@@ -65,7 +65,7 @@ function CarouselPage() {
                 </div>
                 <div className="row">
                     <div className="col-12 text-center mt-5">
-                        <p>&copy; {new Date().getFullYear()} Your Company. All Rights Reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} RA Fashion and Lifestyle. All Rights Reserved.</p>
                     </div>
                 </div>
             </div>
